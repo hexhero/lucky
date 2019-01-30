@@ -1,0 +1,138 @@
+@charset "utf-8";
+
+/**
+ * @created :   2018/01/19
+ * @author  :   Changbb
+ * @version :   v1.0
+ * @desc    :   年会抽奖代码
+ */
+
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    background: url("../img/pc_bg1.jpg") top;
+    background-size: cover;
+}
+.main-box{
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 80px;
+    position: relative;
+}
+/*******title********/
+.title-box{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-left: 82px;
+}
+.title-box img{
+    display: inline-block;
+    max-width: 100%;
+}
+/*******desc********/
+.desc-box{
+    position: absolute;
+    left: -32px;
+    top: -24px;
+    width: 100%;
+    z-index: 5;
+}
+.desc-box img{
+    z-index: 6;
+}
+
+/*******抽奖主体********/
+.boxtitle{
+    padding: 0 50px;
+    border-bottom: #636363 solid 1px;
+    height:68px;
+    margin-bottom: 40px;
+}
+.boxtitle p:first-child{
+    float: left;
+    font-size: 30px;
+}
+.boxtitle p:last-child{
+    float: right;
+    font-size: 18px;
+}
+
+.main{
+    width:1000px;
+    height:300px;
+    position:relative;
+    margin:0 auto;
+    margin-top: -60px;
+}
+.num-bg-box{
+    margin-top: 100px;
+    position: relative;
+    width: 988px;
+    height: 568px;
+    background: #000c;
+    border-radius:65px;
+}
+.num_box{
+    height:100px;
+    width:770px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-378px;
+    margin-top: 60px;
+    z-index:8;
+    overflow:hidden;
+    text-align:center;}
+.num{
+    background:url(../img/num2.png) top center repeat-y;
+    float:left;
+    width: 64px;
+    height: 100px;
+    margin-right:6px;
+}
+.user_name{
+    text-align: center;
+    color: #fff;
+    font-size: 150px;
+}
+.main p{
+    text-align: center;
+    font-size: 36px;
+    color: #fefefe;
+    letter-spacing: 5px;
+    margin-top: 20px;
+}
+.btn-box{
+    width: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 999;
+    position: relative;
+    top: 200px;
+}
+.btn{
+    width: 260px;
+    height: 60px;
+    float: left;
+    line-height: 58px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #00c7fc;
+    border-radius: 21px;
+    font-size: 25px;
+}
+.btn:hover{
+    background-color: #00d468;
+    color: #fff;
+}
+.btn:last-child{
+    margin-left: 20px;
+}

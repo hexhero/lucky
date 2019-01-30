@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>年会抽奖</title>
+
+<link rel="stylesheet" href="../static/css/activi.css">
+
+<script type="text/javascript" src="../static/lib/jquery.js"></script>
+<script type="text/javascript" src="../static/js/easing.js"></script>
+
+</head>
+<body>
+<!-- 主体盒子-->
+<div class="main-box">
+		
+  <div class="main">
+	  <!-- 数字背景盒子-->
+	  <div class="num-bg-box">
+          <div class="boxtitle">
+              <p>现场抽奖</p>
+          </div>
+          <div class="user_name">
+
+          </div>
+		  <!-- 数字盒子-->
+		  <div class="num_box">
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+			  <div class="num"></div>
+		  </div>
+	  </div>
+  </div>
+</div>
+<!-- 操作按钮-->
+<div class="btn-box">
+	<div class="btn start" onclick="exec()">开始抽奖</div>
+	<!-- <div class="btn stop" >停止抽奖</div> -->
+</div>
+
+<!--js-->
+<script>
+
+	var u = 100;
+	var n = 1;
+	var timer; //定义滚动的定时器
+	var result; //指定中奖结果,可以抽取指定数组中的某一个
+	var isBegin  = false; //标识能否开始抽奖
+
+	$(".num").css('backgroundPositionY',200);//开始13888888888
+	$(".num").eq(0).css('backgroundPositionY',-100)
+	$(".num").eq(1).css('backgroundPositionY',-300)
+
+	//执行数字滚动
+	function run(){
+		n++;
+		$(".num").each(function(index){
+			var _num = $(this);
+			_num.animate({
+				backgroundPositionY: ((u+1)*n*(index+1))
+			},100);
+
+		});
+		timer = window.setTimeout(run,100);
+		isBegin = true ;
+    }
+	var name;
+    function exec(){
+         if(isBegin){
+            end();
+            $(".start").text("开始抽奖");
+
+        }else{
+			 $.get("/lucky",function(res){
+				 console.log(res);
+				 result = res.tel;
+				 name = res.name
+			 });
+            start();
+            $(".start").text("停止抽奖")
+            $(".user_name").text("······")
+        }
+    }
+
+    function start(){
+        if(isBegin){
+			return false;
+        }else{
+            run();
+        }
+    }
+
+    function end(){
+        var num_arr = (result+'').split('');
+
+        $(".num").each(function(index){
+            var _num = $(this);
+            setTimeout(function(){
+                _num.animate({
+                    backgroundPositionY: (u*60) - (u*num_arr[index])
+                },{
+                    duration: 500,
+                    easing: "easeInOutCirc",
+                    complete: function(){
+                        if(index == 10){
+                            isBegin = false;
+                        }
+						$(".user_name").text(name);
+                    }
+                });
+            },100);
+        });
+        window.clearTimeout(timer);
+        isBegin = false ;
+    }
+
+	$(function(){
+		// //开始抽奖
+		// $('.start').click(function(){
+		// 	if(isBegin){
+		// 		return false;
+		// 	}else{
+		// 		run();
+		// 	}
+		// });
+		// //停止抽奖
+		// $('.stop').click(function(){
+
+		// 	var num_arr = (result+'').split('');
+
+		// 	$(".num").each(function(index){
+		// 		var _num = $(this);
+		// 		setTimeout(function(){
+		// 			_num.animate({
+		// 				backgroundPositionY: (u*60) - (u*num_arr[index])
+		// 			},{
+		// 				duration: 500,
+		// 				easing: "easeInOutCirc",
+		// 				complete: function(){
+		// 					if(index == 10){
+		// 						isBegin = false;
+		// 					}
+		// 				}
+		// 			});
+		// 		},100);
+		// 	});
+		// 	window.clearTimeout(timer);
+		// 	isBegin = false ;
+		// });
+	});
+</script>
+
+</body>
+</html>

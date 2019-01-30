@@ -1,0 +1,86 @@
+.content{
+    padding-top: 20px;
+}
+.card{
+    margin: 30px auto;
+}
+html,body{
+	width:100%;
+    height:100%;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+body{
+    background: url(../../static/img/bmbg.jpg) no-repeat;
+    background-size:100% 100%;
+    font-family: "Microsoft YaHei";
+}
+.bg{
+    margin-top: 206px;
+    width: 67%;
+}
+.form-in{
+    color: #e1cc90;
+    font-weight: bold;
+}
+.formc{
+    display: block;
+
+    background: none;
+
+    border: none;
+
+        border-bottom-color: currentcolor;
+        border-bottom-style: none;
+        border-bottom-width: medium;
+
+    color: #e1cc90;
+
+    border-bottom: #e1cc90 solid 1px;
+
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 35px;
+    line-height: 42px;
+}
+.sub{
+    background: #e1cc90;
+
+    border: none;
+    
+    width: 100%;
+    
+    margin: 0 auto;
+    
+    display: block;
+    
+    height: 39px;
+    
+    color: #000;
+    
+    font-weight: bold;
+    
+    border-radius: 5px;
+    margin-top: 44px;
+}
+.success{
+    width: 100%;
+    height: 300px;
+    background-size: 100% auto;
+    text-align: center;
+    padding-top: 80px;
+}
+.success .name{
+    color:#e1cc90;
+    font-weight: bold;
+    font-size: 18px;
+}
+.success .name span{
+    font-weight: lighter;
+    font-size: 14px;
+}
+.success .desc{
+    margin-top:30px;
+    color:#e1cc90;
+    font-size: 12px;
+}

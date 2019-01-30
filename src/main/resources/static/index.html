@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖系统</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/user.css">
+    <script src="../static/lib/jquery-3.3.1.slim.min.js"></script>
+    <script src="../static/lib/popper.min.js"></script>
+    <script src="../static/lib/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid bg" id="app">
+        <div class="content">
+            <div v-if="flag" >
+                <div class="form-group form-in">
+                    <label for="username">姓名</label>
+                    <input type="text" v-model="user.name" class="formc" id="username" aria-describedby="emailHelp" placeholder="请输入您的姓名">
+                </div>
+                <div class="form-group form-in">
+                    <label for="tel">手机号码</label>
+                    <input type="text" v-model="user.tel" class="formc" id="tel" aria-describedby="emailHelp" placeholder="请输入您的手机号码">
+                </div>
+                <div>
+                    <button type="button" class="sub" @click="regist" >参加抽奖</button>
+                </div>
+            </div>
+            <div v-else class="success">
+                <div class="name">
+                    <span>恭喜 </span>{{user.name}} <span>报名成功</span>
+                </div>
+                <div class="desc">
+                    活动最终解释权归浙江安普利所有
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../static/lib/vue.min.js"></script>
+<script src="../static/lib/vue-resource.min.js"></script>
+<script src="../static/js/main.js"></script>
+</html>
