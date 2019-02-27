@@ -66,25 +66,23 @@ body{
 
 .main{
     width:1000px;
-    height:300px;
-    position:relative;
     margin:0 auto;
     margin-top: -60px;
 }
 .num-bg-box{
-    margin-top: 100px;
     position: relative;
-    width: 988px;
-    height: 568px;
-    background: #000c;
-    border-radius:65px;
+    width: 100%;
+    height: 800px;
+    background:url('../img/dialog.png') no-repeat;
+    background-size: 100% 100%; 
+    margin: 0 auto;
 }
 .num_box{
     height:100px;
     width:770px;
     position:absolute;
     left:50%;
-    top:50%;
+    top:64%;
     margin-left:-378px;
     margin-top: 60px;
     z-index:8;
@@ -99,8 +97,11 @@ body{
 }
 .user_name{
     text-align: center;
-    color: #fff;
-    font-size: 150px;
+    color: #ffde29;
+    font-size: 100px;
+    width: 100%;
+    position: absolute;
+    top: 54%;
 }
 .main p{
     text-align: center;
@@ -110,29 +111,47 @@ body{
     margin-top: 20px;
 }
 .btn-box{
-    width: 300px;
+    width: 100%;
     margin: 0 auto;
     overflow: hidden;
     z-index: 999;
-    position: relative;
-    top: 200px;
+    position: absolute;
+    bottom: 3%;
+    text-align: center;
 }
 .btn{
-    width: 260px;
+    width: 209px;
     height: 60px;
-    float: left;
     line-height: 58px;
     text-align: center;
     cursor: pointer;
-    color: #fff;
-    background-color: #00c7fc;
+    color: #412dff;
+    background: url('../img/btn.png') no-repeat;
+    background-size: 100% 100%;
     border-radius: 21px;
     font-size: 25px;
+    margin: 0 auto;
+    font-weight: bold;
 }
 .btn:hover{
     background-color: #00d468;
     color: #fff;
 }
-.btn:last-child{
-    margin-left: 20px;
+.users{
+    width:100%;
+    padding: 50px;
+    text-align: center;
+}
+.users .name{
+    width:150px;
+    height: 33px;
+    font-size: 25px;
+    padding: 5px;
+    color:#3e2eff;
+    border-radius: 3px;
+    background:url('../img/btn.png') no-repeat;
+    background-size: 100% 100%;
+    margin: 10px;
+    font-weight: bold;
+    float: left;
 }

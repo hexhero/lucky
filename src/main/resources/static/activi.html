@@ -17,11 +17,9 @@
   <div class="main">
 	  <!-- 数字背景盒子-->
 	  <div class="num-bg-box">
-          <div class="boxtitle">
-              <p>现场抽奖</p>
-          </div>
+         
           <div class="user_name">
-
+			  ··· ···
           </div>
 		  <!-- 数字盒子-->
 		  <div class="num_box">
@@ -35,16 +33,20 @@
 			  <div class="num"></div>
 			  <div class="num"></div>
 			  <div class="num"></div>
-			  <div class="num"></div>
+			  <div class="num"></div>	  
 		  </div>
+
+		  			<!-- 操作按钮-->
+			<div class="btn-box">
+				<div class="btn start" onclick="exec()">开始抽奖</div>
+				<!-- <div class="btn stop" >停止抽奖</div> -->
+			</div>
 	  </div>
   </div>
+  <div class="users" id="users">
+  </div>
 </div>
-<!-- 操作按钮-->
-<div class="btn-box">
-	<div class="btn start" onclick="exec()">开始抽奖</div>
-	<!-- <div class="btn stop" >停止抽奖</div> -->
-</div>
+
 
 <!--js-->
 <script>
@@ -77,6 +79,9 @@
          if(isBegin){
             end();
             $(".start").text("开始抽奖");
+            window.setTimeout(function () {
+				$("#users").append('<p class="name">' + name + '</p>');
+			},2000);
 
         }else{
 			 $.get("/lucky",function(res){
@@ -86,7 +91,7 @@
 			 });
             start();
             $(".start").text("停止抽奖")
-            $(".user_name").text("······")
+            $(".user_name").text("··· ···")
         }
     }
 
