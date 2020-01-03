@@ -21,20 +21,14 @@ public class MainCtrl {
     @Autowired
     private UserRepository userRepository;
 
+    private Random random = new Random();
+
     @GetMapping("/lucky")
     public User getLucky(){
         //获取所有有资格参加抽奖的用户数组
-        Iterable<User> iter = userRepository.findEnableUser();
-        List<User> list = new ArrayList<>();
-        for (User user : iter) {
-            list.add(user);
-        }
-        User[] users = new User[list.size()];
-        list.toArray(users);
-        //使用 java.random 函数再一定范围内随机生成获奖用户索引
-        int index = new Random().nextInt(users.length);
-        //通过索引获取用户。
-        User user = users[index];
+        List<User> users = userRepository.findEnableUser();
+        //使用 java.random 函数抽取中奖用户
+        User user = users.get(random.nextInt(users.size()));
         //下面的代码为了让已中奖的用户不能再次被抽中。
         user.setState((short) 1);
         userRepository.save(user);
