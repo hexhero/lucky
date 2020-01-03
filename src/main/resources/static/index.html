@@ -18,11 +18,11 @@
             <div v-if="flag" >
                 <div class="form-group form-in">
                     <label for="username">姓名</label>
-                    <input type="text" v-model="user.name" class="formc" id="username" aria-describedby="emailHelp" placeholder="请输入姓名">
+                    <input type="text" v-model="user.name" class="formc" id="username" maxlength="5" aria-describedby="emailHelp" placeholder="请输入姓名">
                 </div>
                 <div class="form-group form-in">
                     <label for="tel">手机号码</label>
-                    <input type="text" v-model="user.tel" class="formc" id="tel" aria-describedby="emailHelp" placeholder="请输入手机号码">
+                    <input type="text" v-model="user.tel" class="formc" id="tel" maxlength="13" aria-describedby="emailHelp" placeholder="请输入手机号码">
                 </div>
                 <div>
                     <button type="button" class="sub" @click="regist" >抽 奖</button>
