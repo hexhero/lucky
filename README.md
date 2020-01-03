@@ -9,3 +9,7 @@
 * 抽奖页面1:localhost:8888/static/lotto1.html
 * 抽奖页面2:localhost:8888/static/lotto2.html
 * 抽奖页面3:localhost:8888/static/lotto3.html
+
+## 页面预览
+![报名页](screen/index.jpg)
+![抽奖页](screen/lotto.jpg)
