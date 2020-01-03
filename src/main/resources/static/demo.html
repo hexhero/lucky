@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>年会抽奖</title> 
+<link rel="stylesheet" href="css/demo.css"> 
+<script type="text/javascript" src="lib/jquery.js"></script> 
+</head>
+<body>
+<!-- 主体盒子-->
+<div class="main-box">
+    <div class="main_left">
+        <img src="img/cj-1.png" class="main_title" />
+        <div class="lb">
+            <img src="img/leftbt.png" id="getLeft" onclick="getLeft()" />
+            <img src="img/rightbt.png" id="getRight" onclick="getRight()" />
+            <img src="img/jpt.png"  id="showl" class="show" />
+            <img src="img/jp3.png"  id="show" class="show" />
+            <img src="img/jp2.png"  id="showr" class="show" />
+        </div>
+        <div class="cjrs">
+            抽奖人数 <input value="" type="text" id="num" /> 人
+        </div>
+        <img class="cjbt"  src="img/btns.png" onclick="cjDo()" />
+    </div>
+    <div class="main_right">
+        <img src="img/cj-2.png" class="main_title" />
+        <div class="main_right_title">
+            <span class="type"></span>
+            <span class="num"><font></font>人</span>
+        </div>
+        <div class="list">  
+        </div>
+    </div>
+</div>
+ 
+<script>
+
+    var list = [ {name:'三等奖',img:'jp3.png'},{name:'二等奖',img:'jp2.png'},{name:'一等奖',img:'jp1.png'},{name:'特等奖',img:'jpt.png'} ];
+    var index = 0;
+    
+    function getType(a){ 
+        // if(a == 1){
+        //     $(".show").addClass("rl");  
+        // }
+        // if(a == 2){
+        //     $(".show").addClass("rr"); 
+        // }
+        $(".type").html(list[index].name);
+        $(".num font").html(""); 
+        $("#show").attr("src",'img/' + list[index].img);
+        // window.setTimeout(function () {
+        //     $("#show").attr("src",'img/' + list[index].img);
+        //     if(index == 0){
+        //         $("#showl").attr("src",'img/' + list[list.length - 1].img);
+        //         $("#showr").attr("src",'img/' + list[1].img);
+        //     }else if(index == (list.length - 1)){
+        //         $("#showl").attr("src",'img/' + list[index - 2].img);
+        //         $("#showr").attr("src",'img/' + list[0].img);
+        //     }else{
+        //         $("#showl").attr("src",'img/' + list[index - 1].img);
+        //         $("#showr").attr("src",'img/' + list[index + 1].img);
+        //     } 
+            
+        // },1600);  
+        // window.setTimeout(function () {
+        //     $(".show").removeClass("rl"); 
+        //     $(".show").removeClass("rr");
+        // },5000); 
+    }
+
+    function getLeft(){ 
+        if(index == 0){
+            index = list.length - 1;
+        }else{
+            index--; 
+        }
+        getType(1);
+    }
+
+    function getRight(){ 
+        if(index == (list.length - 1)){
+            index = 0;
+        }else{
+            index++; 
+        }
+        getType(2);
+    }
+ 
+    function cjDo(){ 
+        var times = $("#num").val();
+        $(".list").html("");
+        var html = ''; 
+        if(times && times > 0){
+            $(".num font").html(times);
+            if(times == 1){
+                $.get("/lucky",function(res){
+                    html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
+                    $(".list").append(html);
+                }); 
+            }else{
+                for(var i = 0; i < times; i ++) {   
+                    window.setTimeout(function () { 
+                        $.get("/lucky",function(res){
+                            html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>'; 
+                            $(".list").append(html);
+                        }); 
+                    },1000 * i); 
+                } 
+            } 
+        }
+    } 
+
+    getType(0);
+
+</script>
+
+</body>
+</html>
