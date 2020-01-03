@@ -1,17 +1,16 @@
-package com.yangb.wx.ctrl;
+package com.yangb.lotto.ctrl;
 
-import com.yangb.wx.bean.User;
-import com.yangb.wx.dao.UserRepository;
+import com.yangb.lotto.bean.User;
+import com.yangb.lotto.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 /**
- * wx
+ * lotto
  *
  * @author create by yangb in 2019/1/28
  */

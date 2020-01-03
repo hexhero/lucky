@@ -1,7 +1,7 @@
-package com.yangb.wx.bean;
+package com.yangb.lotto.bean;
 
 /**
- * wx
+ * lotto
  *
  * @author create by yangb in 2019/1/28
  */

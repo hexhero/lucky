@@ -1,15 +1,13 @@
-package com.yangb.wx.ctrl;
+package com.yangb.lotto.ctrl;
 
-import com.yangb.wx.bean.ResultObj;
-import com.yangb.wx.bean.User;
-import com.yangb.wx.dao.UserRepository;
-import org.hibernate.criterion.Example;
+import com.yangb.lotto.bean.ResultObj;
+import com.yangb.lotto.bean.User;
+import com.yangb.lotto.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * wx
+ * lotto
  *
  * @author create by yangb in 2019/1/28
  */

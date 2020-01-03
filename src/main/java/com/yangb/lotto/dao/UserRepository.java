@@ -1,13 +1,13 @@
-package com.yangb.wx.dao;
+package com.yangb.lotto.dao;
 
-import com.yangb.wx.bean.User;
+import com.yangb.lotto.bean.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 /**
- * wx
+ * lotto
  *
  * @author create by yangb in 2019/1/28
  */

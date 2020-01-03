@@ -1,13 +1,13 @@
-package com.yangb.wx;
+package com.yangb.lotto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WxApplication {
+public class LottoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WxApplication.class, args);
+        SpringApplication.run(LottoApplication.class, args);
     }
 
 }

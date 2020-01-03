@@ -1,7 +1,7 @@
-package com.yangb.wx;
+package com.yangb.lotto;
 
-import com.yangb.wx.bean.User;
-import com.yangb.wx.dao.UserRepository;
+import com.yangb.lotto.bean.User;
+import com.yangb.lotto.dao.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class WxApplicationTests {
+public class LottoApplicationTests {
 
     @Autowired
     UserRepository userR;
