@@ -104,7 +104,7 @@
                 // }); 
                 $.ajax({
                     url:"/lucky",
-                    success:function(){
+                    success:function(res){
                         html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
                         $(".list").append(html);
                     },
@@ -113,6 +113,7 @@
                     },
                 });
             }else{
+                var showAlert = true;
                 for(var i = 0; i < times; i ++) {   
                     window.setTimeout(function () { 
                         // $.get("/lucky",function(res){
@@ -125,12 +126,16 @@
                         // }); 
                         $.ajax({
                             url:"/lucky",
-                            success:function(){
+                            success:function(res){
                                 html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
                                 $(".list").append(html);
                             },
-                            error:function(){
-                                alert("暂无人员");
+                            error:function(){ 
+                                if(showAlert){
+                                    alert("暂无人员");
+                                    showAlert = false;
+                                } 
+                                return false; 
                             },
                         });
                     },1000 * i); 
