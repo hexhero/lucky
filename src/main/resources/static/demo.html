@@ -3,28 +3,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>年会抽奖</title> 
-<link rel="stylesheet" href="css/demo.css"> 
-<script type="text/javascript" src="lib/jquery.js"></script> 
+<link rel="stylesheet" href="../static/css/demo.css"> 
+<script type="text/javascript" src="../static/lib/jquery.js"></script> 
 </head>
 <body>
 <!-- 主体盒子-->
 <div class="main-box">
     <div class="main_left">
-        <img src="img/cj-1.png" class="main_title" />
+        <img src="../static/img/cj-1.png" class="main_title" />
         <div class="lb">
-            <img src="img/leftbt.png" id="getLeft" onclick="getLeft()" />
-            <img src="img/rightbt.png" id="getRight" onclick="getRight()" />
-            <img src="img/jpt.png"  id="showl" class="show" />
-            <img src="img/jp3.png"  id="show" class="show" />
-            <img src="img/jp2.png"  id="showr" class="show" />
+            <img src="../static/img/leftbt.png" id="getLeft" onclick="getLeft()" />
+            <img src="../static/img/rightbt.png" id="getRight" onclick="getRight()" />
+            <img src="../static/img/jpt.png"  id="showl" class="show" />
+            <img src="../static/img/jp3.png"  id="show" class="show" />
+            <img src="../static/img/jp2.png"  id="showr" class="show" />
         </div>
         <div class="cjrs">
             抽奖人数 <input value="" type="text" id="num" /> 人
         </div>
-        <img class="cjbt"  src="img/btns.png" onclick="cjDo()" />
+        <img class="cjbt"  src="../static/img/btns.png" onclick="cjDo()" />
     </div>
     <div class="main_right">
-        <img src="img/cj-2.png" class="main_title" />
+        <img src="../static/img/cj-2.png" class="main_title" />
         <div class="main_right_title">
             <span class="type"></span>
             <span class="num"><font></font>人</span>
@@ -48,18 +48,18 @@
         // }
         $(".type").html(list[index].name);
         $(".num font").html(""); 
-        $("#show").attr("src",'img/' + list[index].img);
+        $("#show").attr("src",'../static/img/' + list[index].img);
         // window.setTimeout(function () {
-        //     $("#show").attr("src",'img/' + list[index].img);
+        //     $("#show").attr("src",'../static/img/' + list[index].img);
         //     if(index == 0){
-        //         $("#showl").attr("src",'img/' + list[list.length - 1].img);
-        //         $("#showr").attr("src",'img/' + list[1].img);
+        //         $("#showl").attr("src",'../static/img/' + list[list.length - 1].img);
+        //         $("#showr").attr("src",'../static/img/' + list[1].img);
         //     }else if(index == (list.length - 1)){
-        //         $("#showl").attr("src",'img/' + list[index - 2].img);
-        //         $("#showr").attr("src",'img/' + list[0].img);
+        //         $("#showl").attr("src",'../static/img/' + list[index - 2].img);
+        //         $("#showr").attr("src",'../static/img/' + list[0].img);
         //     }else{
-        //         $("#showl").attr("src",'img/' + list[index - 1].img);
-        //         $("#showr").attr("src",'img/' + list[index + 1].img);
+        //         $("#showl").attr("src",'../static/img/' + list[index - 1].img);
+        //         $("#showr").attr("src",'../static/img/' + list[index + 1].img);
         //     } 
             
         // },1600);  
