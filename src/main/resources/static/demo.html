@@ -36,7 +36,7 @@
  
 <script>
 
-    var list = [ {name:'三等奖',img:'jp3.png'},{name:'二等奖',img:'jp2.png'},{name:'一等奖',img:'jp1.png'},{name:'特等奖',img:'jpt.png'} ];
+    var list = [ {name:'幸运奖',img:'jpt.png'},{name:'三等奖',img:'jp3.png'},{name:'二等奖',img:'jp2.png'},{name:'一等奖',img:'jp1.png'}];
     var index = 0;
     
     function getType(a){ 
@@ -94,17 +94,45 @@
         if(times && times > 0){
             $(".num font").html(times);
             if(times == 1){
-                $.get("/lucky",function(res){
-                    html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
-                    $(".list").append(html);
-                }); 
+                // $.get("/lucky",function(res,status){ 
+                //     if(res.success){
+                //         html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
+                //         $(".list").append(html);
+                //     }else{
+                //         alert("暂无人员");
+                //     } 
+                // }); 
+                $.ajax({
+                    url:"/lucky",
+                    success:function(){
+                        html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
+                        $(".list").append(html);
+                    },
+                    error:function(){
+                        alert("暂无人员");
+                    },
+                });
             }else{
                 for(var i = 0; i < times; i ++) {   
                     window.setTimeout(function () { 
-                        $.get("/lucky",function(res){
-                            html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>'; 
-                            $(".list").append(html);
-                        }); 
+                        // $.get("/lucky",function(res){
+                        //     if(res.success){
+                        //         html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>'; 
+                        //         $(".list").append(html);
+                        //     }else{
+                        //         alert("暂无人员");
+                        //     }  
+                        // }); 
+                        $.ajax({
+                            url:"/lucky",
+                            success:function(){
+                                html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
+                                $(".list").append(html);
+                            },
+                            error:function(){
+                                alert("暂无人员");
+                            },
+                        });
                     },1000 * i); 
                 } 
             } 
