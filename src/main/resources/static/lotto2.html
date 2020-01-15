@@ -21,16 +21,36 @@
         <div class="cjrs">
             抽奖人数 <input value="" type="text" id="num" /> 人
         </div>
-        <img class="cjbt"  src="../static/img/btns.png" onclick="cjDo()" />
+        <img class="cjbt" id="start_bt"  src="../static/img/btns.png" onclick="cjDo()" />
+        <img class="cjbt" id="end_bt" src="../static/img/btns_end.png" onclick="cjStop()" style=" display:none" />
     </div>
     <div class="main_right">
         <img src="../static/img/cj-2.png" class="main_title" />
-        <div class="main_right_title">
+        <!-- <div class="main_right_title">
             <span class="type"></span>
             <span class="num"><font></font>人</span>
-        </div>
-        <div class="list">  
-        </div>
+        </div> -->
+        <div class="list_box"> 
+           
+            <div class="cj_box">
+                <div class="cj_sroll" id="demo">
+                    <div id="demo1" class="cj_sroll_list"> 
+                    </div>
+                    <div id="demo2">
+                        <div class="cj_sroll_list"  id="demo4">  </div> 
+                    </div>  
+                </div>
+                <div class="cj_sroll" style=" position: absolute; top: 0;  background: none; left: 109px;">
+                    <div id="demo3" class="cj_sroll_lists" style="display: none; position:absolute;top:120px; width: 100%;">
+                        <p><p>
+                        <p><p>
+                        <p><p> 
+                    </div>
+                </div>
+                <img src="../static/img/lhj_new.png" class="cj_img" />
+            </div>
+            <div class="list"></div>
+        </div> 
     </div>
 </div>
  
@@ -38,35 +58,33 @@
 
     var list = [ {name:'幸运奖',img:'jpt.png'},{name:'三等奖',img:'jp3.png'},{name:'二等奖',img:'jp2.png'},{name:'一等奖',img:'jp1.png'}];
     var index = 0;
+    var start = true;
+    var times = 0; // 人数   
+    var indexs = 1;  
+    var people_list = [];
+    var speed= 0.5; //数字越大速度越慢
+    var MyMar = null; 
+    var tab=document.getElementById("demo");
+    var tab1=document.getElementById("demo1");
+    var tab2=document.getElementById("demo2");
+    var tab3=document.getElementById("demo3");
+    var tab4=document.getElementById("demo4");
+
+     //克隆demo1为demo2
+    function Marquee(){
+        if(tab2.offsetTop-tab.scrollTop<=0)//当滚动至demo1与demo2交界时
+            tab.scrollTop-=tab1.offsetHeight //demo跳到最顶端
+        else{
+            tab.scrollTop = tab.scrollTop + 2;
+        }
+    } 
     
-    function getType(a){ 
-        // if(a == 1){
-        //     $(".show").addClass("rl");  
-        // }
-        // if(a == 2){
-        //     $(".show").addClass("rr"); 
-        // }
+    function getType(a){  
+        getAll();
         $(".type").html(list[index].name);
+        $(".list").html(""); 
         $(".num font").html(""); 
-        $("#show").attr("src",'../static/img/' + list[index].img);
-        // window.setTimeout(function () {
-        //     $("#show").attr("src",'../static/img/' + list[index].img);
-        //     if(index == 0){
-        //         $("#showl").attr("src",'../static/img/' + list[list.length - 1].img);
-        //         $("#showr").attr("src",'../static/img/' + list[1].img);
-        //     }else if(index == (list.length - 1)){
-        //         $("#showl").attr("src",'../static/img/' + list[index - 2].img);
-        //         $("#showr").attr("src",'../static/img/' + list[0].img);
-        //     }else{
-        //         $("#showl").attr("src",'../static/img/' + list[index - 1].img);
-        //         $("#showr").attr("src",'../static/img/' + list[index + 1].img);
-        //     } 
-            
-        // },1600);  
-        // window.setTimeout(function () {
-        //     $(".show").removeClass("rl"); 
-        //     $(".show").removeClass("rr");
-        // },5000); 
+        $("#show").attr("src",'../static/img/' + list[index].img); 
     }
 
     function getLeft(){ 
@@ -87,65 +105,123 @@
         getType(2);
     }
  
-    function cjDo(){ 
-        var times = $("#num").val();
-        $(".list").html("");
-        var html = ''; 
-        if(times && times > 0){
+    // 开始
+    function cjDo(){  
+        times = $("#num").val();
+        $("#demo3").hide();
+        console.log(times,$("#num").val());
+        if(times && parseInt(times) >= 1){
             $(".num font").html(times);
-            if(times == 1){
-                // $.get("/lucky",function(res,status){ 
-                //     if(res.success){
-                //         html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
-                //         $(".list").append(html);
-                //     }else{
-                //         alert("暂无人员");
-                //     } 
-                // }); 
-                $.ajax({
-                    url:"/lucky",
-                    success:function(res){
-                        html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
-                        $(".list").append(html);
-                    },
-                    error:function(){
-                        alert("暂无人员");
-                    },
-                });
-            }else{
-                var showAlert = true;
-                for(var i = 0; i < times; i ++) {   
-                    window.setTimeout(function () { 
-                        // $.get("/lucky",function(res){
-                        //     if(res.success){
-                        //         html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>'; 
-                        //         $(".list").append(html);
-                        //     }else{
-                        //         alert("暂无人员");
-                        //     }  
-                        // }); 
-                        $.ajax({
-                            url:"/lucky",
-                            success:function(res){
-                                html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
-                                $(".list").append(html);
-                            },
-                            error:function(){ 
-                                if(showAlert){
-                                    alert("暂无人员");
-                                    showAlert = false;
-                                } 
-                                return false; 
-                            },
-                        });
-                    },1000 * i); 
-                } 
-            } 
+            $("#start_bt").hide();
+            $("#end_bt").show(); 
+            MyMar=setInterval(Marquee,speed);
+        }else {
+            alert("请输入大于1的数字");
+        }  
+    }
+
+    // 暂停
+    function cjStop(){    
+        getWinning();  
+        getWinnerStop1();
+    }
+
+    // 判断有没有滚动到中间
+    function getWinnerStop1(){  
+        console.log(tab.scrollTop);
+        if(tab.scrollTop % 40 == 0 ){
+            $("#demo3").show();
+            clearInterval(MyMar);  
+            getWinnerStop();
+        }else{
+            setTimeout(function () { 
+                tab.scrollTop = tab.scrollTop + 2;
+                getWinnerStop1();
+             },0.5);
         }
-    } 
+    }
 
+    // demo 滚动
+    function getWinnerStop(){  
+        console.log(tab.scrollTop,tab3.offsetTop);
+        if(tab3.offsetTop > 1 ){
+            setTimeout(function () {  
+                if(tab2.offsetTop-tab.scrollTop<=0){
+                    tab.scrollTop-=tab1.offsetHeight  
+                }else{
+                    tab.scrollTop = tab.scrollTop + 2;
+                }
+                $("#demo3").css('top',(tab3.offsetTop - 2) + 'px');
+                getWinnerStop();
+             },0.5);  
+        }
+    }
+ 
+    // 获取幸运人员
+    function getWinning(){  
+        $.ajax({
+            url:"/lucky",
+            success:function(res){
+                html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
+                var rand = Math.floor( Math.random()*people_list.length); 
+                people_list.forEach(function(e,i){
+                    if(e.tel == res.tel){
+                        if(i == 0){
+                            $("#demo3 p").eq(0).html(people_list[2].tel);
+                            $("#demo3 p").eq(2).html(people_list[3].tel);
+                        }else if(i == (people_list.length - 1)){
+                            $("#demo3 p").eq(0).html(people_list[0].tel);
+                            $("#demo3 p").eq(2).html(people_list[1].tel);
+                        }else{
+                            $("#demo3 p").eq(0).html(people_list[i - 1].tel);
+                            $("#demo3 p").eq(2).html(people_list[i + 1].tel);
+                        }
+                    }
+                })
+                $("#demo3 p").eq(1).html(res.tel).css('background','#fff');
+                setTimeout(function () { getWinner(html); },500); 
+            },
+            error:function(){
+                alert("暂无人员");
+            },
+        });
+        
+        
+    }
+
+    function getWinner(html){
+        $(".list").append(html);
+        $("#num").val($("#num").val() - 1);
+        $("#end_bt").hide();
+        $("#start_bt").show(); 
+    }
+
+    
+        // 获取滚动的人员
+    function getAll(){ 
+        $.ajax({
+            url:"/user",
+            success:function(res){
+                people_list =  res.data;
+                var html_people = "";
+                if(people_list && people_list.length > 0 ){ 
+                    $(".cj_sroll_list").html(""); 
+                    $(".cj_sroll_list").css("margin-top",0);
+                    for (var i = 0; i < people_list.length; i++) {
+                        html_people = '<p>'+ people_list[i].tel +'</p>';  
+                        $(".cj_sroll_list").append(html_people); 
+                    } 
+                }
+                tab4.innerHTML=tab1.innerHTML;
+            },
+            error:function(){
+                alert("暂无人员");
+            },
+        });  
+    }
+ 
+    
     getType(0);
-
 </script>
 
 </body>
