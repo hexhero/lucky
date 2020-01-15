@@ -62,7 +62,7 @@
     var times = 0; // 人数   
     var indexs = 1;  
     var people_list = [];
-    var speed=10; //数字越大速度越慢
+    var speed= 5; //数字越大速度越慢
     var MyMar = null; 
     var tab=document.getElementById("demo");
     var tab1=document.getElementById("demo1");
@@ -137,7 +137,7 @@
             setTimeout(function () { 
                 tab.scrollTop++; 
                 getWinnerStop1();
-             },10);
+             },5);
         }
     }
 
@@ -149,7 +149,7 @@
                 tab.scrollTop++;
                 $("#demo3").css('top',(tab3.offsetTop - 1) + 'px');
                 getWinnerStop();
-             },10);  
+             },5);  
         }
     }
  
@@ -159,6 +159,21 @@
             url:"/lucky",
             success:function(res){
                 html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
+                var rand = Math.floor( Math.random()*people_list.length); 
+                people_list.forEach(function(e,i){
+                    if(e.tel == res.tel){
+                        if(i == 0){
+                            $("#demo3 p").eq(0).html(people_list[2].tel);
+                            $("#demo3 p").eq(2).html(people_list[3].tel);
+                        }else if(i == (people_list.length - 1)){
+                            $("#demo3 p").eq(0).html(people_list[0].tel);
+                            $("#demo3 p").eq(2).html(people_list[1].tel);
+                        }else{
+                            $("#demo3 p").eq(0).html(people_list[i - 1].tel);
+                            $("#demo3 p").eq(2).html(people_list[i + 1].tel);
+                        }
+                    }
+                })
                 $("#demo3 p").eq(1).html(res.tel).css('background','#fff');
                 setTimeout(function () { getWinner(html); },500); 
             },
@@ -184,7 +199,6 @@
             url:"/user",
             success:function(res){
                 people_list =  res.data;
-                people_list =  [{"name":"BYMDJ","tel":"18716871555","state":null},{"name":"杨幂","tel":"1231241231131","state":null},{"name":"杨幂2","tel":"13312286388","state":null},{"name":"周杰伦","tel":"13312286388","state":null},{"name":"sheng","tel":"18716873335","state":null},{"name":"王先生1","tel":"18716871111","state":null},{"name":"王先生2","tel":"18716871222","state":null},{"name":"王先生3","tel":"18716871333","state":null},{"name":"BYM2","tel":"18716871000","state":null}];
                 var html_people = "";
                 if(people_list && people_list.length > 0 ){ 
                     $(".cj_sroll_list").html(""); 

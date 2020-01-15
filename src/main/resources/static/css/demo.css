@@ -345,7 +345,6 @@ body{
     position: absolute;
     width: 100%;
 }
-#demo3 p{
-    background: none;
+#demo3 p{ 
     height: 40px;
 } 
