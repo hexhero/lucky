@@ -13,11 +13,11 @@ body{
     background-size: cover;
 }
 .main-box{
-    width: 1080px;
+    width: 1380px;
     margin: 0 auto;
     top: 50%;
     left: 50%;
-    margin-left: -540px;
+    margin-left: -690px;
     margin-top: -300px;
     position: fixed;
     overflow: hidden;
@@ -33,7 +33,7 @@ body{
 }
 .main_right{
     float: right;
-    width: 615px;
+    width: 915px;
     height: 514px;
     background: rgba(0, 0, 0, 0.45);
     border-radius: 10px;
@@ -152,6 +152,7 @@ body{
     height: 360px;
     color: #fff; 
     overflow: hidden;
+    float: left;
 }  
 .list .info1{
     line-height: 40px;
@@ -296,3 +297,44 @@ body{
         -o-transform:translateX(365px)  ; 
     }
 } 
+
+.list_box{
+    width: 850px;
+    margin: 0 auto;
+    height: auto;
+    overflow: hidden;
+}
+.cj_box{
+    width: 275px;
+    height: 355px;
+    float: right;
+    position: relative;
+}
+.cj_sroll{
+    width:270px;
+    height: 269px;
+    text-align: center;
+    background: #fff;
+    margin: 42px 2px;
+    border-radius: 37px;
+    overflow: hidden;
+    position: relative;
+}
+.cj_sroll p{
+    line-height: 30px;
+    color: #873a29;
+}
+.cj_img{
+    position: absolute;
+    width: 275px;
+    height: 354px;
+    top: 0px
+}
+#winner{
+    line-height: 30px;
+    color: #873a29;
+    bottom: 0px;
+    background: #fff;
+    position: absolute;
+    width: 100%;
+}

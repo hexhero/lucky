@@ -21,7 +21,8 @@
         <div class="cjrs">
             抽奖人数 <input value="" type="text" id="num" /> 人
         </div>
-        <img class="cjbt"  src="../static/img/btns.png" onclick="cjDo()" />
+        <img class="cjbt" id="start_bt"  src="../static/img/btns.png" onclick="cjDo()" />
+        <img class="cjbt" id="end_bt" src="../static/img/btns_end.png" onclick="cjStop()" style=" display:none" />
     </div>
     <div class="main_right">
         <img src="../static/img/cj-2.png" class="main_title" />
@@ -29,8 +30,17 @@
             <span class="type"></span>
             <span class="num"><font></font>人</span>
         </div>
-        <div class="list">  
-        </div>
+        <div class="list_box"> 
+            <div class="list"></div>
+            <div class="cj_box">
+                <div class="cj_sroll">
+                    <div class="cj_sroll_list "></div>
+                    <p id="winner"></p>
+                    <!-- <div class="cj_sroll_list cj_sroll_list2"></div> -->
+                </div>
+                <img src="../static/img/lhj.png" class="cj_img" />
+            </div>
+        </div> 
     </div>
 </div>
  
@@ -38,35 +48,22 @@
 
     var list = [ {name:'幸运奖',img:'jpt.png'},{name:'三等奖',img:'jp3.png'},{name:'二等奖',img:'jp2.png'},{name:'一等奖',img:'jp1.png'}];
     var index = 0;
+    var start = true;
+    var times = 0; // 人数 
+    var $uList = ""; 
+    var timer = null;
+    var timerhtml = null;
+    var indexs = 1;
+    var htmls = "";  
+    var scrollHeight = 0;   
+    var people_list = [];
     
-    function getType(a){ 
-        // if(a == 1){
-        //     $(".show").addClass("rl");  
-        // }
-        // if(a == 2){
-        //     $(".show").addClass("rr"); 
-        // }
+    function getType(a){  
+        getAll();
         $(".type").html(list[index].name);
+        $(".list").html(""); 
         $(".num font").html(""); 
-        $("#show").attr("src",'../static/img/' + list[index].img);
-        // window.setTimeout(function () {
-        //     $("#show").attr("src",'../static/img/' + list[index].img);
-        //     if(index == 0){
-        //         $("#showl").attr("src",'../static/img/' + list[list.length - 1].img);
-        //         $("#showr").attr("src",'../static/img/' + list[1].img);
-        //     }else if(index == (list.length - 1)){
-        //         $("#showl").attr("src",'../static/img/' + list[index - 2].img);
-        //         $("#showr").attr("src",'../static/img/' + list[0].img);
-        //     }else{
-        //         $("#showl").attr("src",'../static/img/' + list[index - 1].img);
-        //         $("#showr").attr("src",'../static/img/' + list[index + 1].img);
-        //     } 
-            
-        // },1600);  
-        // window.setTimeout(function () {
-        //     $(".show").removeClass("rl"); 
-        //     $(".show").removeClass("rr");
-        // },5000); 
+        $("#show").attr("src",'../static/img/' + list[index].img); 
     }
 
     function getLeft(){ 
@@ -87,65 +84,100 @@
         getType(2);
     }
  
-    function cjDo(){ 
-        var times = $("#num").val();
-        $(".list").html("");
-        var html = ''; 
-        if(times && times > 0){
+    function cjDo(){  
+        times = $("#num").val();
+        console.log(times,$("#num").val());
+        if(times && parseInt(times) >= 1){
             $(".num font").html(times);
-            if(times == 1){
-                // $.get("/lucky",function(res,status){ 
-                //     if(res.success){
-                //         html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
-                //         $(".list").append(html);
-                //     }else{
-                //         alert("暂无人员");
-                //     } 
-                // }); 
-                $.ajax({
-                    url:"/lucky",
-                    success:function(res){
-                        html = '<div class="info">'+ res.name +'（' + res.tel +'）</div>';
-                        $(".list").append(html);
-                    },
-                    error:function(){
-                        alert("暂无人员");
-                    },
-                });
-            }else{
-                var showAlert = true;
-                for(var i = 0; i < times; i ++) {   
-                    window.setTimeout(function () { 
-                        // $.get("/lucky",function(res){
-                        //     if(res.success){
-                        //         html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>'; 
-                        //         $(".list").append(html);
-                        //     }else{
-                        //         alert("暂无人员");
-                        //     }  
-                        // }); 
-                        $.ajax({
-                            url:"/lucky",
-                            success:function(res){
-                                html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
-                                $(".list").append(html);
-                            },
-                            error:function(){ 
-                                if(showAlert){
-                                    alert("暂无人员");
-                                    showAlert = false;
-                                } 
-                                return false; 
-                            },
-                        });
-                    },1000 * i); 
-                } 
-            } 
-        }
+            $("#start_bt").hide();
+            $("#end_bt").show();
+            getAll(); 
+            setTimeout(getAlls,1000); 
+            $("#winner").css("bottom",0);
+        }else {
+            alert("请输入大于1的数字");
+        }  
+    }
+
+
+    function cjStop(){   
+        $("#winner").stop().animate({
+            bottom: 119
+        }, 400,'linear');  
+        getWinning(); 
+        clearInterval(timer);  
+    }
+ 
+    function getWinning(){  
+        $.ajax({
+            url:"/lucky",
+            success:function(res){
+                html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
+                $("#winner").html(res.tel);
+                setTimeout(function () { getWinner(html); },500); 
+            },
+            error:function(){
+                alert("暂无人员");
+            },
+        });
+        
+        
+    }
+
+    function getWinner(html){
+        $(".list").append(html);
+        $("#num").val($("#num").val() - 1);
+        $("#end_bt").hide();
+        $("#start_bt").show(); 
+    }
+
+    function getAlls(){  
+        $uList = $(".cj_sroll_list"); 
+        htmls = $(".cj_sroll_list").html();  
+        scrollHeight = $(".cj_sroll_list p:first").height();    
+        $(".cj_sroll_list").append(htmls);
+        indexs = 1
+        scrollList(indexs,scrollHeight);  
+        indexs ++;
+        timer = setInterval(function() {  
+            scrollList(indexs,scrollHeight); 
+            $(".cj_sroll_list").append(htmls); 
+            indexs ++;
+        }, 80 * people_list.length);
+    }
+
+ 
+    //滚动动画
+    function scrollList(indexs,h,htmls) {   
+        console.log(-h * indexs * people_list.length);
+        $uList.stop().animate({
+                marginTop: -h * indexs  * people_list.length
+        }, 80 * people_list.length,'linear');  
     } 
 
+    function getAll(){ 
+        $.ajax({
+            url:"/user",
+            success:function(res){
+                people_list =  res.data;
+                var html_people = "";
+                if(people_list && people_list.length > 0 ){ 
+                    $(".cj_sroll_list").html(""); 
+                    $(".cj_sroll_list").css("margin-top",0);
+                    for (var i = 0; i < people_list.length; i++) {
+                        html_people = '<p>'+ people_list[i].tel +'</p>';  
+                        $(".cj_sroll_list").append(html_people); 
+                    } 
+                }
+            },
+            error:function(){
+                alert("暂无人员");
+            },
+        });  
+    }
+ 
+    
     getType(0);
-
 </script>
 
 </body>
