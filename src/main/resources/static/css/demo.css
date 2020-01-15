@@ -13,11 +13,11 @@ body{
     background-size: cover;
 }
 .main-box{
-    width: 1380px;
+    width: 1080px;
     margin: 0 auto;
     top: 50%;
     left: 50%;
-    margin-left: -690px;
+    margin-left: -540px;
     margin-top: -300px;
     position: fixed;
     overflow: hidden;
@@ -33,7 +33,7 @@ body{
 }
 .main_right{
     float: right;
-    width: 915px;
+    width: 615px;
     height: 514px;
     background: rgba(0, 0, 0, 0.45);
     border-radius: 10px;
@@ -149,10 +149,9 @@ body{
     width: 540px;
     margin: 0 auto;
     margin-top: 20px;
-    height: 360px;
-    color: #fff; 
+    height: 240px;
+    color: #fff;
     overflow: hidden;
-    float: left;
 }  
 .list .info1{
     line-height: 40px;
@@ -299,36 +298,44 @@ body{
 } 
 
 .list_box{
-    width: 850px;
+    width: 100%;
     margin: 0 auto;
     height: auto;
     overflow: hidden;
 }
 .cj_box{
-    width: 275px;
-    height: 355px;
-    float: right;
+    width: 100%;
+    height: 180px;
     position: relative;
+    overflow: hidden;
+    margin-top: 40px;
 }
 .cj_sroll{
-    width:270px;
-    height: 269px;
+    margin: 30px auto;
+    width: 396px;
+    height: 120px;
     text-align: center;
     background: #fff;
-    margin: 42px 2px;
     border-radius: 37px;
     overflow: hidden;
     position: relative;
 }
 .cj_sroll p{
-    line-height: 30px;
+    line-height: 40px;
+    text-align: center;
     color: #873a29;
+    background: #fff;
+    font-size: 31px;
+    letter-spacing: 6px;
+    font-weight: 600;
+    text-indent: 6px;
 }
 .cj_img{
     position: absolute;
-    width: 275px;
-    height: 354px;
-    top: 0px
+    width: 458px;
+    height: 180px;
+    top: 0px;
+    left: 78.5px;
 }
 #winner{
     line-height: 30px;
@@ -338,3 +345,7 @@ body{
     position: absolute;
     width: 100%;
 }
+#demo3 p{
+    background: none;
+    height: 40px;
+} 

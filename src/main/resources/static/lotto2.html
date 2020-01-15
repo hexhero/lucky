@@ -26,20 +26,30 @@
     </div>
     <div class="main_right">
         <img src="../static/img/cj-2.png" class="main_title" />
-        <div class="main_right_title">
+        <!-- <div class="main_right_title">
             <span class="type"></span>
             <span class="num"><font></font>人</span>
-        </div>
+        </div> -->
         <div class="list_box"> 
-            <div class="list"></div>
+           
             <div class="cj_box">
-                <div class="cj_sroll">
-                    <div class="cj_sroll_list "></div>
-                    <p id="winner"></p>
-                    <!-- <div class="cj_sroll_list cj_sroll_list2"></div> -->
+                <div class="cj_sroll" id="demo">
+                    <div id="demo1" class="cj_sroll_list"> 
+                    </div>
+                    <div id="demo2">
+                        <div class="cj_sroll_list"  id="demo4">  </div> 
+                    </div>  
                 </div>
-                <img src="../static/img/lhj.png" class="cj_img" />
+                <div class="cj_sroll" style=" position: absolute; top: 0;  background: none; left: 109px;">
+                    <div id="demo3" class="cj_sroll_lists" style="display: none; position:absolute;top:120px; width: 100%;">
+                        <p><p>
+                        <p><p>
+                        <p><p> 
+                    </div>
+                </div>
+                <img src="../static/img/lhj_new.png" class="cj_img" />
             </div>
+            <div class="list"></div>
         </div> 
     </div>
 </div>
@@ -49,14 +59,25 @@
     var list = [ {name:'幸运奖',img:'jpt.png'},{name:'三等奖',img:'jp3.png'},{name:'二等奖',img:'jp2.png'},{name:'一等奖',img:'jp1.png'}];
     var index = 0;
     var start = true;
-    var times = 0; // 人数 
-    var $uList = ""; 
-    var timer = null;
-    var timerhtml = null;
-    var indexs = 1;
-    var htmls = "";  
-    var scrollHeight = 0;   
+    var times = 0; // 人数   
+    var indexs = 1;  
     var people_list = [];
+    var speed=10; //数字越大速度越慢
+    var MyMar = null; 
+    var tab=document.getElementById("demo");
+    var tab1=document.getElementById("demo1");
+    var tab2=document.getElementById("demo2");
+    var tab3=document.getElementById("demo3");
+    var tab4=document.getElementById("demo4");
+
+     //克隆demo1为demo2
+    function Marquee(){
+        if(tab2.offsetTop-tab.scrollTop<=0)//当滚动至demo1与demo2交界时
+            tab.scrollTop-=tab1.offsetHeight //demo跳到最顶端
+        else{
+            tab.scrollTop++
+        }
+    } 
     
     function getType(a){  
         getAll();
@@ -84,36 +105,61 @@
         getType(2);
     }
  
+    // 开始
     function cjDo(){  
         times = $("#num").val();
+        $("#demo3").hide();
         console.log(times,$("#num").val());
         if(times && parseInt(times) >= 1){
             $(".num font").html(times);
             $("#start_bt").hide();
-            $("#end_bt").show();
-            getAll(); 
-            setTimeout(getAlls,1000); 
-            $("#winner").css("bottom",0);
+            $("#end_bt").show(); 
+            MyMar=setInterval(Marquee,speed);
         }else {
             alert("请输入大于1的数字");
         }  
     }
 
+    // 暂停
+    function cjStop(){    
+        getWinning();  
+        getWinnerStop1();
+    }
 
-    function cjStop(){   
-        $("#winner").stop().animate({
-            bottom: 119
-        }, 400,'linear');  
-        getWinning(); 
-        clearInterval(timer);  
+    // 判断有没有滚动到中间
+    function getWinnerStop1(){  
+        console.log(tab.scrollTop);
+        if(tab.scrollTop % 40 == 0 ){
+            $("#demo3").show();
+            clearInterval(MyMar);  
+            getWinnerStop();
+        }else{
+            setTimeout(function () { 
+                tab.scrollTop++; 
+                getWinnerStop1();
+             },10);
+        }
+    }
+
+    // demo 滚动
+    function getWinnerStop(){  
+        console.log(tab.scrollTop,tab3.offsetTop);
+        if(tab3.offsetTop > 1 ){
+            setTimeout(function () { 
+                tab.scrollTop++;
+                $("#demo3").css('top',(tab3.offsetTop - 1) + 'px');
+                getWinnerStop();
+             },10);  
+        }
     }
  
+    // 获取幸运人员
     function getWinning(){  
         $.ajax({
             url:"/lucky",
             success:function(res){
                 html = '<div class="info1">'+ res.name +'（' + res.tel +'）</div>';
-                $("#winner").html(res.tel);
+                $("#demo3 p").eq(1).html(res.tel).css('background','#fff');
                 setTimeout(function () { getWinner(html); },500); 
             },
             error:function(){
@@ -131,35 +177,14 @@
         $("#start_bt").show(); 
     }
 
-    function getAlls(){  
-        $uList = $(".cj_sroll_list"); 
-        htmls = $(".cj_sroll_list").html();  
-        scrollHeight = $(".cj_sroll_list p:first").height();    
-        $(".cj_sroll_list").append(htmls);
-        indexs = 1
-        scrollList(indexs,scrollHeight);  
-        indexs ++;
-        timer = setInterval(function() {  
-            scrollList(indexs,scrollHeight); 
-            $(".cj_sroll_list").append(htmls); 
-            indexs ++;
-        }, 80 * people_list.length);
-    }
-
- 
-    //滚动动画
-    function scrollList(indexs,h,htmls) {   
-        console.log(-h * indexs * people_list.length);
-        $uList.stop().animate({
-                marginTop: -h * indexs  * people_list.length
-        }, 80 * people_list.length,'linear');  
-    } 
-
+    
+        // 获取滚动的人员
     function getAll(){ 
         $.ajax({
             url:"/user",
             success:function(res){
                 people_list =  res.data;
+                people_list =  [{"name":"BYMDJ","tel":"18716871555","state":null},{"name":"杨幂","tel":"1231241231131","state":null},{"name":"杨幂2","tel":"13312286388","state":null},{"name":"周杰伦","tel":"13312286388","state":null},{"name":"sheng","tel":"18716873335","state":null},{"name":"王先生1","tel":"18716871111","state":null},{"name":"王先生2","tel":"18716871222","state":null},{"name":"王先生3","tel":"18716871333","state":null},{"name":"BYM2","tel":"18716871000","state":null}];
                 var html_people = "";
                 if(people_list && people_list.length > 0 ){ 
                     $(".cj_sroll_list").html(""); 
@@ -169,6 +194,7 @@
                         $(".cj_sroll_list").append(html_people); 
                     } 
                 }
+                tab4.innerHTML=tab1.innerHTML;
             },
             error:function(){
                 alert("暂无人员");
