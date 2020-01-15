@@ -62,7 +62,7 @@
     var times = 0; // 人数   
     var indexs = 1;  
     var people_list = [];
-    var speed= 5; //数字越大速度越慢
+    var speed= 3; //数字越大速度越慢
     var MyMar = null; 
     var tab=document.getElementById("demo");
     var tab1=document.getElementById("demo1");
@@ -137,7 +137,7 @@
             setTimeout(function () { 
                 tab.scrollTop++; 
                 getWinnerStop1();
-             },5);
+             },3);
         }
     }
 
@@ -145,11 +145,15 @@
     function getWinnerStop(){  
         console.log(tab.scrollTop,tab3.offsetTop);
         if(tab3.offsetTop > 1 ){
-            setTimeout(function () { 
-                tab.scrollTop++;
+            setTimeout(function () {  
+                if(tab2.offsetTop-tab.scrollTop<=0){
+                    tab.scrollTop-=tab1.offsetHeight  
+                }else{
+                    tab.scrollTop++
+                }
                 $("#demo3").css('top',(tab3.offsetTop - 1) + 'px');
                 getWinnerStop();
-             },5);  
+             },3);  
         }
     }
  
