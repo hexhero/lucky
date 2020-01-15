@@ -62,7 +62,7 @@
     var times = 0; // 人数   
     var indexs = 1;  
     var people_list = [];
-    var speed= 3; //数字越大速度越慢
+    var speed= 0.5; //数字越大速度越慢
     var MyMar = null; 
     var tab=document.getElementById("demo");
     var tab1=document.getElementById("demo1");
@@ -75,7 +75,7 @@
         if(tab2.offsetTop-tab.scrollTop<=0)//当滚动至demo1与demo2交界时
             tab.scrollTop-=tab1.offsetHeight //demo跳到最顶端
         else{
-            tab.scrollTop++
+            tab.scrollTop = tab.scrollTop + 2;
         }
     } 
     
@@ -135,9 +135,9 @@
             getWinnerStop();
         }else{
             setTimeout(function () { 
-                tab.scrollTop++; 
+                tab.scrollTop = tab.scrollTop + 2;
                 getWinnerStop1();
-             },3);
+             },0.5);
         }
     }
 
@@ -149,11 +149,11 @@
                 if(tab2.offsetTop-tab.scrollTop<=0){
                     tab.scrollTop-=tab1.offsetHeight  
                 }else{
-                    tab.scrollTop++
+                    tab.scrollTop = tab.scrollTop + 2;
                 }
-                $("#demo3").css('top',(tab3.offsetTop - 1) + 'px');
+                $("#demo3").css('top',(tab3.offsetTop - 2) + 'px');
                 getWinnerStop();
-             },3);  
+             },0.5);  
         }
     }
  
