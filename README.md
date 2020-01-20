@@ -1,5 +1,8 @@
 # 签到抽奖系统
 
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/yangb92/lucky)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/yangb92/lucky)
+
 ## 启动项目
 
 ### 方式一：源码启动
