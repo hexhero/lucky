@@ -17,14 +17,9 @@ java -jar lotto-1.0.jar
 ```
 ## 抽奖流程
 
-```flow
-st=>start: 开始
-op1=>operation: :phone: 扫码登记
-op2=>operation: 抽奖环节
-e=>end: 结束
+手机扫码签到 -> 抽奖
 
-st->op1->op2->e
-```
+> 提醒： 抽奖人数不少于10人
 
 ## 页面列表
 
