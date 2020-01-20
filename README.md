@@ -6,7 +6,7 @@
 标准的SpringBoot项目，运行`LottoApplication.java`
 
 ### 方式二：执行jar文件
-查看最后发布的[版本](/releases) 下载jar文件.
+查看最后发布[版本](http://github.com/yangb92/lucky/releases) 下载jar文件.
 执行命令
 ```sh
 java -jar lotto-1.0.jar
