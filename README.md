@@ -6,7 +6,7 @@
 标准的SpringBoot项目，运行`LottoApplication.java`
 
 ### 方式二：执行jar文件
-下载执行jar文件[lotto-1.0.jar](lotto-1.0.jar)
+下载执行jar文件[lotto-1.0.jar](https://github.com/yangb92/lucky/releases/tag/2020_v2)
 执行命令
 ```sh
 java -jar lotto-1.0.jar
