@@ -37,7 +37,7 @@
             <a href="/static/lotto3.html">抽奖页3</a>
         </div>
 
-        查看签到页二维码请复制下面链接在浏览器中访问<p id="qr"></p>
+        签到页扫码下方二维码<p id="qr"></p>
 
     </div>
     <footer>
@@ -48,7 +48,7 @@
     <script>
         var qr = document.getElementById("qr")
         var url = "http://" + location.host+"/static/index.html"
-        qr.innerHTML="http://api.k780.com:88/?app=qr.get&data=" + url+ "&level=L&size=6"
+        qr.innerHTML="<img src='http://qr.topscan.com/api.php?text=" + url+ "'/>"
     </script>
 </body>
 </html>
