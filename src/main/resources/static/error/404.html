@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导航</title>
+    <style>
+        .content{
+            width: 100%;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .box{
+            margin: 15px;
+        }
+        footer{
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+<body>
+    <div class="content">
+        <h1>签到抽奖系统</h1>
+        <div class="box">
+            <a href="/static/index.html">签到页面</a>
+        </div>
+        <div class="box">
+            <a href="/static/lotto1.html">抽奖页1</a>
+        </div>
+        <div class="box">
+            <a href="/static/lotto2.html">抽奖页2</a>
+        </div>
+        <div class="box">
+            <a href="/static/lotto3.html">抽奖页3</a>
+        </div>
+
+        查看签到页二维码请复制下面链接在浏览器中访问<p id="qr"></p>
+
+    </div>
+    <footer>
+        <p>©️杨斌-2022</p>
+        <p>github:<a href="https://github.com/yangb92">https://github.com/yangb92</a></p>
+        <p>email: 523084685@qq.com</p>
+    </footer>
+    <script>
+        var qr = document.getElementById("qr")
+        var url = "http://" + location.host+"/static/index.html"
+        qr.innerHTML="http://api.k780.com:88/?app=qr.get&data=" + url+ "&level=L&size=6"
+    </script>
+</body>
+</html>
