@@ -1,4 +1,4 @@
-# 签到抽奖系统:tada:
+# 乐透抽奖软件:tada:
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/yangb92/lucky)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/yangb92/lucky)
 
