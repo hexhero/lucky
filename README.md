@@ -1,5 +1,4 @@
-# 签到抽奖系统
-
+# 签到抽奖系统:tada:
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/yangb92/lucky)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/yangb92/lucky)
 
